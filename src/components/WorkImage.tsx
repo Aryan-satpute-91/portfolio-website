@@ -2,7 +2,8 @@ import { useState } from "react";
 import { MdArrowOutward } from "react-icons/md";
 
 interface Props {
-  image: string;
+  image?: string;
+  images?: string[];
   alt?: string;
   video?: string;
   link?: string;
@@ -36,7 +37,14 @@ const WorkImage = (props: Props) => {
             <MdArrowOutward />
           </div>
         )}
-        <img src={props.image} alt={props.alt} />
+        {props.image && <img src={props.image} alt={props.alt} />}
+        {props.images && (
+          <div className="work-image-group">
+            {props.images.map((img, i) => (
+              <img key={i} src={img} alt={`${props.alt} ${i + 1}`} />
+            ))}
+          </div>
+        )}
         {isVideo && <video src={video} autoPlay muted playsInline loop></video>}
       </a>
     </div>

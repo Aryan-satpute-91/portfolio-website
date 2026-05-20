@@ -81,3 +81,14 @@
     font-size: 18px;
   }
 }
+
+.nav-menu-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+@media only screen and (max-width: 500px) {
+  .nav-menu-wrapper {
+    gap: 15px;
+  }
+}

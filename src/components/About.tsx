@@ -6,9 +6,9 @@ const About = () => {
       <div className="about-me">
         <h3 className="title">About Me</h3>
         <p className="para">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-          dolores numquam iusto Ratione earum ducimus autem id iure pariatur
-          dolorum quae maiores.
+          Software Developer and CS & Design student with 1+ years of experience building scalable web
+          and Android apps. Proficient in React, Node.js, Java, and Kotlin, with a strong foundation
+          in databases, cloud deployment, and AI/ML integrations using Google Gemini AI.
         </p>
       </div>
     </div>

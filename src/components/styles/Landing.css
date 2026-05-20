@@ -87,15 +87,27 @@
   width: 400px;
   height: 400px;
   z-index: 1;
-  background-color: #f59bf8;
-  transform: translate(-50%, 36%) scaleX(1.4);
-  box-shadow: inset 66px 35px 85px 0px rgba(85, 0, 255, 0.65);
-  filter: blur(50px);
+  background: radial-gradient(
+    ellipse at center,
+    #f59bf8 0%,
+    #c840ff 35%,
+    rgba(84, 0, 255, 0.4) 70%,
+    transparent 100%
+  );
+  box-shadow:
+    inset 66px 35px 85px 0px rgba(85, 0, 255, 0.65),
+    0 0 60px 20px rgba(200, 64, 255, 0.3);
+  filter: blur(45px);
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, 100%) scale(1.4);
   opacity: 0;
+  animation: rimHueRotate 8s linear infinite;
+}
+@keyframes rimHueRotate {
+  0%   { filter: blur(45px) hue-rotate(0deg); }
+  100% { filter: blur(45px) hue-rotate(360deg); }
 }
 .character-model {
   height: 80%;
@@ -155,6 +167,8 @@
   z-index: 3;
   transform: translate(-50%, -50%);
   border-radius: 50%;
+  pointer-events: all;
+  cursor: pointer;
 }
 .landing-intro {
   position: absolute;

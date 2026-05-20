@@ -13,7 +13,8 @@ const Cursor = () => {
       mousePos.x = e.clientX;
       mousePos.y = e.clientY;
     });
-    requestAnimationFrame(function loop() {
+    let reqId: number;
+    reqId = requestAnimationFrame(function loop() {
       if (!hover) {
         const delay = 6;
         cursorPos.x += (mousePos.x - cursorPos.x) / delay;
@@ -21,7 +22,7 @@ const Cursor = () => {
         gsap.to(cursor, { x: cursorPos.x, y: cursorPos.y, duration: 0.1 });
         // cursor.style.transform = `translate(${cursorPos.x}px, ${cursorPos.y}px)`;
       }
-      requestAnimationFrame(loop);
+      reqId = requestAnimationFrame(loop);
     });
     document.querySelectorAll("[data-cursor]").forEach((item) => {
       const element = item as HTMLElement;
@@ -46,6 +47,10 @@ const Cursor = () => {
         hover = false;
       });
     });
+
+    return () => {
+      cancelAnimationFrame(reqId);
+    };
   }, []);
 
   return <div className="cursor-main" ref={cursorRef}></div>;

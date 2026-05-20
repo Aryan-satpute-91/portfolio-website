@@ -1,0 +1,137 @@
+.aurora-background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--backgroundColor);
+  transition: background-color 0.8s ease;
+  will-change: transform;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  filter: blur(120px);
+  will-change: transform, background-color, opacity;
+  opacity: 0.35;
+}
+
+/* Base starting positions and styles for the 3 main dynamic blobs */
+.aurora-blob-1 {
+  width: 45vmax;
+  height: 45vmax;
+  background-color: #7a1fff; /* Electric violet */
+  top: -10%;
+  left: -10%;
+  animation: blobFloat1 25s infinite alternate ease-in-out;
+}
+
+.aurora-blob-2 {
+  width: 40vmax;
+  height: 40vmax;
+  background-color: #ff1f87; /* Hot Pink */
+  bottom: 10%;
+  right: -5%;
+  animation: blobFloat2 20s infinite alternate ease-in-out;
+}
+
+.aurora-blob-3 {
+  width: 35vmax;
+  height: 35vmax;
+  background-color: #00f0ff; /* Electric Cyan */
+  bottom: -10%;
+  left: 20%;
+  animation: blobFloat3 22s infinite alternate ease-in-out;
+}
+
+/* Static ambient baseline glow to prevent any pure black spots */
+.aurora-blob-ambient {
+  width: 65vmax;
+  height: 65vmax;
+  background: radial-gradient(circle, rgba(122, 31, 255, 0.08) 0%, transparent 70%);
+  top: 15%;
+  left: 15%;
+  filter: blur(100px);
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* Dynamic CSS floating animations for baseline organic movements even when idle */
+@keyframes blobFloat1 {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(30px, 50px) rotate(120deg) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) rotate(240deg) scale(0.95);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(360deg) scale(1);
+  }
+}
+
+@keyframes blobFloat2 {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50px, -30px) rotate(-180deg) scale(1.1);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(-360deg) scale(1);
+  }
+}
+
+@keyframes blobFloat3 {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(0.9);
+  }
+  40% {
+    transform: translate(40px, -40px) rotate(90deg) scale(1.05);
+  }
+  80% {
+    transform: translate(-30px, 30px) rotate(270deg) scale(1);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(360deg) scale(0.9);
+  }
+}
+
+/* Optimize rendering for low-power and mobile devices */
+@media (max-width: 768px) {
+  .aurora-blob {
+    filter: blur(80px);
+    opacity: 0.25;
+  }
+  .aurora-blob-1 {
+    width: 55vmax;
+    height: 55vmax;
+  }
+  .aurora-blob-2 {
+    width: 50vmax;
+    height: 50vmax;
+  }
+  .aurora-blob-3 {
+    width: 45vmax;
+    height: 45vmax;
+  }
+}
+
+/* Day Mode Overrides for Aurora Blobs */
+:root[data-theme="light"] .aurora-blob {
+  mix-blend-mode: multiply;
+  opacity: 0.15;
+}
+
+:root[data-theme="light"] .aurora-blob-ambient {
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+  background: radial-gradient(circle, rgba(106, 27, 255, 0.1) 0%, transparent 70%);
+}

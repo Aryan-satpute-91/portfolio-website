@@ -8,7 +8,7 @@
   line-height: 1.5;
   scroll-behavior: smooth;
   color-scheme: light dark;
-  color: #eae5ec;
+  color: var(--textColor);
   background-color: var(--backgroundColor);
 
   font-synthesis: none;
@@ -18,11 +18,36 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
+  
+  /* Color tokens - Dark Mode by default */
   --accentColor: #c2a4ff;
   --backgroundColor: #0b080c;
+  --textColor: #eae5ec;
+  --cardBackground: rgba(25, 20, 30, 0.4);
+  --borderColor: rgba(255, 255, 255, 0.1);
+  --tagBackground: rgba(255, 255, 255, 0.05);
+
   --vh: 100vh;
   --vh: 100svh;
+  
+  transition: background-color 0.8s ease, color 0.8s ease;
 }
+
+/* Light Theme Variables Override */
+:root[data-theme="light"] {
+  --backgroundColor: #f5f3f7;
+  --textColor: #1e1a24;
+  --accentColor: #6a1bff; /* Richer high-contrast violet for light backgrounds */
+  --cardBackground: rgba(255, 255, 255, 0.7);
+  --borderColor: rgba(0, 0, 0, 0.08);
+  --tagBackground: rgba(0, 0, 0, 0.04);
+}
+
+/* Apply smooth transitions globally for all theme-shifting properties */
+html, body, p, h1, h2, h3, h4, h5, h6, a, span, button, input, div {
+  transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease, transform 0.3s ease;
+}
+
 h1,
 h2,
 h3,
@@ -31,40 +56,48 @@ h5,
 h6 {
   font-family: "Geist", sans-serif;
 }
+
 body {
   overflow: hidden;
 }
+
 a {
   color: inherit;
   text-decoration: inherit;
 }
+
 a:hover {
   color: var(--accentColor);
 }
+
 main {
   opacity: 1;
   transition: 0.3s;
 }
+
 .main-active {
   opacity: 0;
   animation: fadeIn 1s 1;
   animation-fill-mode: forwards;
 }
+
 @keyframes fadeIn {
   100% {
     opacity: 1;
   }
 }
+
 body {
   margin: 0;
   height: auto;
-  background-color: #000;
+  background-color: var(--backgroundColor);
   flex-grow: 1;
   --cWidth: calc(100% - 30px);
   --cMaxWidth: 1920px;
   max-width: 100vw;
   overflow-x: hidden;
 }
+
 .main-body {
   max-width: 100vw;
   overflow-x: hidden;
@@ -75,15 +108,18 @@ body {
   margin: auto;
   position: relative;
 }
+
 .container1 {
   width: var(--cWidth);
   height: var(--vh);
   margin: auto;
   position: relative;
 }
+
 .split-line {
   overflow: hidden;
 }
+
 .split-h2 {
   overflow: hidden;
   display: flex;
@@ -94,10 +130,12 @@ body {
 .techstack {
   width: 100%;
   position: relative;
-  height: var(--vh);
+  height: 90vh;
   margin: auto;
-  margin-top: 50px;
-  margin-bottom: -100px;
+  margin-top: 140vh;
+  margin-bottom: 20vh;
+  z-index: 1;
+  background-color: var(--backgroundColor);
 }
 
 .techstack h2 {
@@ -111,13 +149,43 @@ body {
   text-transform: uppercase;
 }
 
+.tech-canvas {
+  transform: translateY(25px);
+}
+
 @media screen and (min-width: 768px) {
   body {
     --cWidth: 94%;
   }
 }
+
 @media screen and (max-width: 900px) {
   .techstack h2 {
     font-size: 40px;
+  }
+}
+
+.techstack-sub {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 30px;
+  top: auto;
+  left: 0;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #666;
+  font-weight: 400;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 900px) {
+  .techstack-sub {
+    bottom: 20px;
+    font-size: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
   }
 }

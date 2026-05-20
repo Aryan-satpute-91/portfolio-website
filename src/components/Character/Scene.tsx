@@ -12,14 +12,18 @@ import {
 } from "./utils/mouseUtils";
 import setAnimations from "./utils/animationUtils";
 import { setProgress } from "../Loading";
+import { useTheme } from "../../context/ThemeContext";
+import { setCharTimeline, setAllTimeline } from "../utils/GsapScroll";
 
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
   const hoverDivRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef(new THREE.Scene());
   const { setLoading } = useLoading();
-
+  const { theme } = useTheme();
   const [character, setChar] = useState<THREE.Object3D | null>(null);
+  const lightRef = useRef<any>(null);
+
   useEffect(() => {
     if (canvasDiv.current) {
       let rect = canvasDiv.current.getBoundingClientRect();
@@ -32,7 +36,7 @@ const Scene = () => {
         antialias: true,
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       canvasDiv.current.appendChild(renderer.domElement);
@@ -46,10 +50,12 @@ const Scene = () => {
       let headBone: THREE.Object3D | null = null;
       let screenLight: any | null = null;
       let mixer: THREE.AnimationMixer;
+      let colorCycleInterval: ReturnType<typeof setInterval>;
 
       const clock = new THREE.Clock();
 
       const light = setLighting(scene);
+      lightRef.current = light;
       let progress = setProgress((value) => setLoading(value));
       const { loadCharacter } = setCharacter(renderer, scene, camera);
 
@@ -63,10 +69,19 @@ const Scene = () => {
           scene.add(character);
           headBone = character.getObjectByName("spine006") || null;
           screenLight = character.getObjectByName("screenlight") || null;
+          
+          setCharTimeline(character, camera, animations.introAction, animations.introClip);
+          setAllTimeline();
+
           progress.loaded().then(() => {
             setTimeout(() => {
-              light.turnOnLights();
+              const currentTheme = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
+              light.turnOnLights(currentTheme);
               animations.startIntro();
+              // Cycle neon accent colours every 4 s for a living look
+              colorCycleInterval = setInterval(() => {
+                light.cycleColors();
+              }, 4000);
             }, 2500);
           });
           window.addEventListener("resize", () =>
@@ -106,8 +121,9 @@ const Scene = () => {
         landingDiv.addEventListener("touchstart", onTouchStart);
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
+      let reqId: number;
       const animate = () => {
-        requestAnimationFrame(animate);
+        reqId = requestAnimationFrame(animate);
         if (headBone) {
           handleHeadRotation(
             headBone,
@@ -117,6 +133,8 @@ const Scene = () => {
             interpolation.y,
             THREE.MathUtils.lerp
           );
+        }
+        if (screenLight) {
           light.setPointLight(screenLight);
         }
         const delta = clock.getDelta();
@@ -127,8 +145,11 @@ const Scene = () => {
       };
       animate();
       return () => {
+        cancelAnimationFrame(reqId);
         clearTimeout(debounce);
+        clearInterval(colorCycleInterval);
         scene.clear();
+        renderer.forceContextLoss();
         renderer.dispose();
         window.removeEventListener("resize", () =>
           handleResize(renderer, camera, canvasDiv, character!)
@@ -144,6 +165,12 @@ const Scene = () => {
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (lightRef.current) {
+      lightRef.current.transitionToTheme(theme);
+    }
+  }, [theme]);
 
   return (
     <>

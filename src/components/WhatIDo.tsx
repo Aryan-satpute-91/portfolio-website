@@ -43,7 +43,7 @@ const WhatIDo = () => {
                 y1="0"
                 x2="0"
                 y2="100%"
-                stroke="white"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeDasharray="7,7"
               />
@@ -52,7 +52,7 @@ const WhatIDo = () => {
                 y1="0"
                 x2="100%"
                 y2="100%"
-                stroke="white"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeDasharray="7,7"
               />
@@ -69,7 +69,7 @@ const WhatIDo = () => {
                   y1="0"
                   x2="100%"
                   y2="0"
-                  stroke="white"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="6,6"
                 />
@@ -78,7 +78,7 @@ const WhatIDo = () => {
                   y1="100%"
                   x2="100%"
                   y2="100%"
-                  stroke="white"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="6,6"
                 />
@@ -88,23 +88,23 @@ const WhatIDo = () => {
 
             <div className="what-content-in">
               <h3>DEVELOP</h3>
-              <h4>Description</h4>
+              <h4>Full-Stack Web Development</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae.
+                Building scalable web applications with modern frontend frameworks and robust backend APIs.
+                Experienced in cloud deployments with CI/CD pipelines on Vercel and Render.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
                 <div className="what-tags">JavaScript</div>
                 <div className="what-tags">TypeScript</div>
-                <div className="what-tags">Three.js</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Css</div>
+                <div className="what-tags">React.js</div>
                 <div className="what-tags">Node.js</div>
-                <div className="what-tags">Next.js</div>
                 <div className="what-tags">Express.js</div>
-                <div className="what-tags">PHP</div>
-                <div className="what-tags">MySql</div>
+                <div className="what-tags">RESTful APIs</div>
+                <div className="what-tags">PostgreSQL</div>
+                <div className="what-tags">MongoDB</div>
+                <div className="what-tags">Supabase</div>
+                <div className="what-tags">Firebase</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -120,7 +120,7 @@ const WhatIDo = () => {
                   y1="100%"
                   x2="100%"
                   y2="100%"
-                  stroke="white"
+                  stroke="currentColor"
                   strokeWidth="2"
                   strokeDasharray="6,6"
                 />
@@ -128,22 +128,22 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>DESIGN</h3>
-              <h4>Description</h4>
+              <h3>MOBILE</h3>
+              <h4>Android Development</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                quia aliquid laboriosam ducimus sit molestiae
+                Crafting native Android apps with Jetpack Compose and MVVM Clean Architecture,
+                integrating real-time features via Supabase, Firebase, and Google Gemini AI.
               </p>
-              <h5>Skillset & tools</h5>
+              <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Blender</div>
-                <div className="what-tags">Zbrush</div>
-                <div className="what-tags">UI Design</div>
-                <div className="what-tags">Motion</div>
-                <div className="what-tags">Rigging</div>
-                <div className="what-tags">3D Animation</div>
-                <div className="what-tags">Character Design</div>
-                <div className="what-tags">Modelling</div>
+                <div className="what-tags">Kotlin</div>
+                <div className="what-tags">Jetpack Compose</div>
+                <div className="what-tags">MVVM Architecture</div>
+                <div className="what-tags">Clean Architecture</div>
+                <div className="what-tags">Ktor</div>
+                <div className="what-tags">CameraX</div>
+                <div className="what-tags">Supabase Realtime</div>
+                <div className="what-tags">Firebase Firestore</div>
               </div>
               <div className="what-arrow"></div>
             </div>
