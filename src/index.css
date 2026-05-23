@@ -44,8 +44,9 @@
 }
 
 /* Apply smooth transitions globally for all theme-shifting properties */
+/* NOTE: transform is intentionally excluded here — GSAP manages scroll/animation transforms */
 html, body, p, h1, h2, h3, h4, h5, h6, a, span, button, input, div {
-  transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease, transform 0.3s ease;
+  transition: background-color 0.8s ease, color 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
 }
 
 h1,
@@ -132,7 +133,7 @@ body {
   position: relative;
   height: 90vh;
   margin: auto;
-  margin-top: 140vh;
+  margin-top: 110vh;
   margin-bottom: 20vh;
   z-index: 1;
   background-color: var(--backgroundColor);
